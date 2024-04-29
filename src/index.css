@@ -16,7 +16,10 @@
 
 body{
   background-color: #eee; 
-  font-family: "Poppins", sans-serif;
+}
+
+body.dark-theme{
+  background-color: #333;
 }
 
 /* LOADER - LOADING */
@@ -26,6 +29,11 @@ body{
 
 /* HEADER */
 /* navbar */
+.btn-toggle{
+  background-color: transparent;
+  border: none;
+  font-size: 25px;
+}
 
 /* MAIN */
 main{
