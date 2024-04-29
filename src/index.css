@@ -1,3 +1,6 @@
+/* BOOTSTRAP */
+@import "/node_modules//bootstrap/dist/css/bootstrap.min.css";
+
 /* GENERAL */
 *{
   margin: 0;
@@ -9,4 +12,28 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+body{
+  background-color: #eee; 
+  font-family: "Poppins", sans-serif;
+}
+
+/* LOADER - LOADING */
+.loading{
+  height: 100vh;
+}
+
+/* HEADER */
+/* navbar */
+
+/* MAIN */
+main{
+  flex: 1;
+}
+
+/* FOOTER */
+.footer {
+  background-color: #000;
+  font-weight: 600;
 }
