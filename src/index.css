@@ -16,10 +16,16 @@
 
 body{
   background-color: #eee; 
+  color: #000;
 }
 
 body.dark-theme{
   background-color: #333;
+  color: #fff;
+}
+
+.btn:active{
+  transform: scale(0.95);
 }
 
 /* LOADER - LOADING */
@@ -38,6 +44,17 @@ body.dark-theme{
 /* MAIN */
 main{
   flex: 1;
+}
+
+/* search form */
+.search-form-input{
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 10px;
+  margin-right: 5px;
+  outline: none;
 }
 
 /* FOOTER */

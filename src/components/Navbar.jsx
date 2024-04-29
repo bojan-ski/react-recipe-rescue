@@ -12,10 +12,10 @@ const Navbar = () => {
 
   return (
     <header>
-      <nav class="navbar bg-body-tertiary p-3">
+      <nav className="navbar bg-body-tertiary p-3">
         {/* logo */}
         <div className="logo">
-          <a class="navbar-brand" href="/">
+          <a className="navbar-brand" href="/">
             Recipe Rescue App
           </a>
         </div>
