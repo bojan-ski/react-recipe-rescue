@@ -7,7 +7,7 @@ const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState('')
-    const [listOfMeals, setListOfMeals] = useState({})
+    const [listOfRecipes, setListOfRecipes] = useState({})
 
     const getData = async (searchTerm) => {
         console.log(searchTerm);
@@ -15,15 +15,15 @@ export const AppProvider = ({ children }) => {
             const response = await axios.get(`${apiUrl}${searchTerm}`)
             // console.log(response);
             const results = response.data
-            setListOfMeals(results.meals);      
+            setListOfRecipes(results.meals);      
         } catch (error) {
             console.log(error);
         }
     }
 
-    console.log(listOfMeals);
+    // console.log(listOfRecipes);
 
-    return <AppContext.Provider value={{ getData, setSearchTerm, listOfMeals }}>
+    return <AppContext.Provider value={{ getData, searchTerm, setSearchTerm, listOfRecipes }}>
         {children}
     </AppContext.Provider>
 }

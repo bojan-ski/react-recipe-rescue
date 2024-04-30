@@ -9,10 +9,15 @@ const SearchByNameForm = () => {
     setSearchTerm(e.target.searchTerm.value.toLowerCase().trim());
 
     getData(e.target.searchTerm.value)
+    e.target.searchTerm.value = ''
   }
 
   return (
     <section className="mt-4">
+      <h3 className="text-center mb-3">
+        You have a recipe in mind?
+      </h3>
+
       <form className="w-50 mx-auto d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
         {/* input field */}
         <input type="text" name="searchTerm" id="searchTerm" className="search-form-input w-75" placeholder="Enter search term" required />
