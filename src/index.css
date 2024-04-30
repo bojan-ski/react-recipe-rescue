@@ -57,6 +57,11 @@ main{
   outline: none;
 }
 
+/* Single Recipe Details */
+.recipe-details-main p span{
+    font-weight: 600;
+}
+
 /* FOOTER */
 .footer {
   background-color: #000;

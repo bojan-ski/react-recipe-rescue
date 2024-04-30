@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom"
 import AppLayout from "./pages/AppLayout"
 import Dashboard from "./pages/Dashboard"
 import AdvanceSearch from "./pages/AdvanceSearch"
+import SingleRecipeDetails from "./pages/SingleRecipeDetails"
 import Error from "./pages/Error"
 
 const router = createBrowserRouter([
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: 'search',
         element: <AdvanceSearch/>
+      },
+      {
+        path: 'recipe/:id',
+        element: <SingleRecipeDetails/>
       }
     ]
   }

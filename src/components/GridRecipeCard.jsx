@@ -5,8 +5,8 @@ const GridRecipeCard = ({ recipe }) => {
     return (
         <>
             <div className="col-12 col-md-6 col-lg-3 mb-2" key={recipe.idMeal}>
-                <div className="card recipe-card p-1">
-                    <div className="img-container">
+                <div className="card recipe-card p-2">
+                    <div className="img-container mb-2">
                         <img src={recipe.strMealThumb} alt={recipe.strMeal} className="img-fluid" />
                     </div>
 

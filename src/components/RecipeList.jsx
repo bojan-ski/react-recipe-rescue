@@ -19,7 +19,6 @@ const RecipeList = () => {
                 <div className="row">
                     {listOfRecipes.length > 0 ? (listOfRecipes.map(recipe => {
                         // console.log(recipe);
-
                         return <GridRecipeCard recipe={recipe}/>
                     })) : (
                         ""
