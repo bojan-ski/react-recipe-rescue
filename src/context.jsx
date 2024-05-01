@@ -1,9 +1,6 @@
 import { createContext, useContext, useState } from "react";
 import axios from "axios";
-
-const apiUrl = 'https://www.themealdb.com/api/json/v1/1/'
-
-// https://www.themealdb.com/api/json/v1/1/random.php
+import { getRecipeDetails } from "./utils/getRecipeDetails";
 
 const AppContext = createContext()
 
@@ -15,7 +12,7 @@ export const AppProvider = ({ children }) => {
     const getData = async (searchTerm) => {
         // console.log(searchTerm);
         try {
-            const response = await axios.get(`${apiUrl}search.php?s=${searchTerm}`)
+            const response = await axios.get(`${import.meta.env.VITE_URL}search.php?s=${searchTerm}`)
             // console.log(response);
             const results = response.data
             // console.log(results);
@@ -27,27 +24,13 @@ export const AppProvider = ({ children }) => {
 
     const getSelectedRecipeDetails = async (id) => {
         // console.log(id);
-        try {
-            const response = await axios.get(`${apiUrl}lookup.php?i=${id}`)
-            // console.log(response);
-            const results = response.data.meals[0]
-            // console.log(results);
-            setRecipeDetails(results)
-        } catch (error) {
-            console.log(error);
-        }
+        const recipeData = await getRecipeDetails('lookup.php?i=', id)
+        setRecipeDetails(recipeData) 
     }
 
-    const getRandomRecipeDetails = async () => {        
-        try {
-            const response = await axios.get(`${apiUrl}random.php`)
-            // console.log(response);
-            const results = response.data.meals[0]
-            // console.log(results);
-            setRecipeDetails(results)
-        } catch (error) {
-            console.log(error);
-        }
+    const getRandomRecipeDetails = async () => {    
+        const recipeData = await getRecipeDetails('random.php')
+        setRecipeDetails(recipeData)      
     }
 
     // console.log(listOfRecipes);
