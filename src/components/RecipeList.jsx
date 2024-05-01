@@ -10,7 +10,7 @@ const RecipeList = () => {
             <div className="container">
                 {searchTerm ? (
                     <h2 className="text-center mb-4">
-                        Search results for: {searchTerm}
+                        Search results for: {searchTerm.toUpperCase()}
                     </h2>
                 ) : (
                     ''

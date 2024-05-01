@@ -3,6 +3,8 @@ import axios from "axios";
 
 const apiUrl = 'https://www.themealdb.com/api/json/v1/1/'
 
+// https://www.themealdb.com/api/json/v1/1/random.php
+
 const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
@@ -22,7 +24,7 @@ export const AppProvider = ({ children }) => {
         }
     }
 
-    const getRecipeDetails = async (id) => {
+    const getSelectedRecipeDetails = async (id) => {
         // console.log(id);
         try {
             const response = await axios.get(`${apiUrl}lookup.php?i=${id}`)
@@ -35,10 +37,22 @@ export const AppProvider = ({ children }) => {
         }
     }
 
+    const getRandomRecipeDetails = async () => {        
+        try {
+            const response = await axios.get(`${apiUrl}random.php`)
+            // console.log(response);
+            const results = response.data.meals[0]
+            // console.log(results);
+            setRecipeDetails(results)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     // console.log(listOfRecipes);
     // console.log(recipeDetails);
 
-    return <AppContext.Provider value={{ getData, searchTerm, setSearchTerm, listOfRecipes, getRecipeDetails, recipeDetails }}>
+    return <AppContext.Provider value={{ getData, searchTerm, setSearchTerm, listOfRecipes, getSelectedRecipeDetails, recipeDetails, getRandomRecipeDetails }}>
         {children}
     </AppContext.Provider>
 }

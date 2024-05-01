@@ -1,38 +1,41 @@
 import { useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../context"
+import RecipeDetails from "../components/RecipeDetails";
 
-const SingleRecipeDetails = () => {
-    const { getRecipeDetails, recipeDetails } = useGlobalContext()
-    const params = useParams()
-    // console.log(params.id);
-
-    useEffect(() => {
-        getRecipeDetails(params.id)
-    }, [])
-
+const RandomRecipe = () => {
+    const { getRandomRecipeDetails, recipeDetails } = useGlobalContext()
     // console.log(recipeDetails);
 
-    const ingredients = Object.keys(recipeDetails)
-    .filter((key) => key.startsWith('strIngredient') && recipeDetails[key] !== '')
-    .map((key) => recipeDetails[key]);
-    
-    const measure = Object.keys(recipeDetails)
-    .filter((key) => key.startsWith('strMeasure') && recipeDetails[key] !== " ")
-    .map((key) => recipeDetails[key]);
+    useEffect(() => {
+        getRandomRecipeDetails()
+    }, [])
 
+    // const ingredients = Object.keys(recipeDetails)
+    //     .filter((key) => key.startsWith('strIngredient') && recipeDetails[key] !== '')
+    //     .map((key) => recipeDetails[key]);
+
+    // const measure = Object.keys(recipeDetails)
+    //     .filter((key) => key.startsWith('strMeasure') && recipeDetails[key] !== " ")
+    //     .map((key) => recipeDetails[key]);
+    
     // console.log(ingredients, measure);
+
+    return <RecipeDetails recipeDetails={recipeDetails} getRandomRecipeDetails={getRandomRecipeDetails}/>
 
     return (
         <div className="container my-5">
-            <section className="recipe-details-header d-flex align-items-center justify-content-around mb-4">
-                <Link to='/' className="btn btn-success px-4">
-                    Back
-                </Link>
+            <section className="recipe-details-header d-flex align-items-center mb-4">
+                <div className="btn-container w-50">
+                    <button type="button" className="btn btn-warning" onClick={() => getRandomRecipeDetails()}>
+                        New Suggestion
+                    </button>
+                </div>
 
-                <h2>
-                    {recipeDetails.strMeal}
-                </h2>
+                <div className="title-container w-50 text-center">
+                    <h2>
+                        {recipeDetails.strMeal}
+                    </h2>
+                </div>
             </section>
 
             <section className="recipe-details-main">
@@ -61,14 +64,14 @@ const SingleRecipeDetails = () => {
                                         </li>
                                     );
                                 })}
-                            </ul>                            
+                            </ul>
                         </p>
                     </div>
 
                     {/* row item 3 */}
                     <div className="col-12">
                         <h5 className="text-center">
-                            How to prepare the meal: 
+                            How to prepare the meal:
                         </h5>
                         <p>
                             {recipeDetails.strInstructions}
@@ -80,4 +83,4 @@ const SingleRecipeDetails = () => {
     )
 }
 
-export default SingleRecipeDetails
+export default RandomRecipe

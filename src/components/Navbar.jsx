@@ -32,10 +32,15 @@ const Navbar = () => {
               Advance Search
             </NavLink>
           </li>
+          <li className="nav-item mx-2">
+            <NavLink to="suggestion" className="nav-link">
+              Our Suggestion
+            </NavLink>
+          </li>
         </ul>
 
         {/* toggle theme btn */}
-        <button className="btn-toggle" onClick={toggleTheme}>
+        <button className="btn-toggle d-flex" onClick={toggleTheme}>
           {isDarkTheme ? (
             <BsFillSunFill />
           ) : (
