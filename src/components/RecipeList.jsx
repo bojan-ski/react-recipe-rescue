@@ -5,8 +5,16 @@ const RecipeList = () => {
     const { searchTerm, listOfRecipes } = useGlobalContext()
     // console.log(listOfRecipes);
 
+    if(!listOfRecipes) {
+        return <section className="search-results-section mt-5">
+            <h2 className="text-center">
+                No search results found, please try a new recipe (recipe title)
+            </h2>
+        </section>
+    }
+
     return (
-        <section className="mt-5">
+        <section className="search-results-section mt-5">
             <div className="container">
                 {searchTerm ? (
                     <h2 className="text-center mb-4">

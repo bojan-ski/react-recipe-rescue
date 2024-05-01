@@ -13,7 +13,7 @@ const SearchByNameForm = () => {
   }
 
   return (
-    <section className="mt-4">
+    <section className="search-form-section mt-4">
       <h3 className="text-center mb-3">
         You have a recipe in mind?
       </h3>

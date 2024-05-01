@@ -18,13 +18,13 @@ const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
     return (
         <div className="container my-5">
             <section className="recipe-details-header d-flex align-items-center mb-4">
-                <div className="btn-container w-50 text-center">
+                <div className="btn-container w-50">
                     {getRandomRecipeDetails ? (
                         <button type="button" className="btn btn-warning" onClick={() => getRandomRecipeDetails()}>
                             New Suggestion
                         </button>
                     ) : (
-                        <Link to='/' className="btn btn-success px-4">
+                        <Link to='/' className="btn btn-info px-4">
                             Back
                         </Link>
                     )}

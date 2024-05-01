@@ -18,6 +18,7 @@ export const AppProvider = ({ children }) => {
             const response = await axios.get(`${apiUrl}search.php?s=${searchTerm}`)
             // console.log(response);
             const results = response.data
+            // console.log(results);
             setListOfRecipes(results.meals);      
         } catch (error) {
             console.log(error);
