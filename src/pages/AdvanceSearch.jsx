@@ -1,9 +1,11 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+// import { useEffect } from "react";
+import { useState } from "react";
+import { selectFilterOption } from "../utils/selectFilterOption";
 
-const urlCategories = 'list.php?c=list'
-const urlArea = 'list.php?a=list'
-const urlIngredients = 'list.php?i=list'
+// const urlCategories = 'list.php?c=list'
+// const urlArea = 'list.php?a=list'
+// const urlIngredients = 'list.php?i=list'
 
 let a = 0;
 let b = 30;
@@ -13,12 +15,15 @@ const AdvanceSearch = () => {
     totalOptionsList: '',
     displayedOptionsList: ''
   })
+  const [selectedOption, setSelectedOption] = useState('')
 
-  const getFilterOptions = async () => {
+  const displayFilterOptions = async (urlType) => {
+    // console.log(urlType);
     try {
       // const response = await axios.get(`${import.meta.env.VITE_URL}${urlCategories}`)
       // const response = await axios.get(`${import.meta.env.VITE_URL}${urlArea}`)
-      const response = await axios.get(`${import.meta.env.VITE_URL}${urlIngredients}`)
+      // const response = await axios.get(`${import.meta.env.VITE_URL}${urlIngredients}`)
+      const response = await axios.get(`${import.meta.env.VITE_URL}${urlType}`)
       // console.log(response);
       const results = response.data.meals
       // console.log(results);
@@ -31,15 +36,29 @@ const AdvanceSearch = () => {
     }
   }
 
-  // console.log(selectedFilterOption);
+  const handleSubmitRadioOption = e => {
+    e.preventDefault()
 
-  useEffect(() => {
-    getFilterOptions()
-  }, [])
+    const urlType = selectFilterOption(Array.from(e.target.elements))
 
-  // console.log(selectedFilterOption);
+    if (urlType === "ingredients") {
+      displayFilterOptions('list.php?i=list')
+    } else if (urlType === "area") {
+      displayFilterOptions('list.php?a=list')
+    } else {
+      displayFilterOptions('list.php?c=list')
+    }
+  }
 
-  const displayAdditionalOptions = (term) => {
+  const handleSubmitFilterOption = e => {
+    e.preventDefault()
+
+    setSelectedOption(selectFilterOption(Array.from(e.target.elements)))
+  }
+
+  console.log(selectedOption);
+
+  const displayAdditionalIngredientsOptions = (term) => {
     // console.log(term);
     // console.log(a, b);
 
@@ -54,38 +73,59 @@ const AdvanceSearch = () => {
     }
 
     if (b === 0) {
-      setSelectedFilterOption(oldData => ({
-        ...oldData,
-        displayedOptionsList: oldData.totalOptionsList.slice(-30)
+      setSelectedFilterOption(currData => ({
+        ...currData,
+        displayedOptionsList: currData.totalOptionsList.slice(-30)
       }))
     } else {
-      setSelectedFilterOption(oldData => ({
-        ...oldData,
-        displayedOptionsList: oldData.totalOptionsList.slice(a, b)
+      setSelectedFilterOption(currData => ({
+        ...currData,
+        displayedOptionsList: currData.totalOptionsList.slice(a, b)
       }))
     }
     // console.log(a, b);
   }
 
-  // console.log(selectedFilterOption.displayedOptionsList.length);
-
-  const handleSubmit = e => {
-    e.preventDefault()
-
-    const availableOptions = Array.from(e.target.elements)
-
-    const selectedOption = availableOptions
-      .filter(options => options.checked)
-      .map(options => options.id)
-
-    console.log(selectedOption);
-  }
-
   return (
     <div className="my-5">
+      {/* FORM - Select filter options */}
+      <section className="mb-3">
+        <form className="w-50 mx-auto" onSubmit={handleSubmitRadioOption}>
+          {/* radio btns */}
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
+            <div className="d-flex">
+              <div className="form-check">
+                <label htmlFor="categories" className="form-check-label">
+                  Categories
+                </label>
+                <input type="radio" id="categories" name="radio" className="form-check-input" defaultChecked />
+              </div>
+              <div className="form-check ms-3">
+                <label htmlFor="area" className="form-check-label">
+                  Area
+                </label>
+                <input type="radio" id="area" name="radio" className="form-check-input" />
+              </div>
+              <div className="form-check ms-3">
+                <label htmlFor="ingredients" className="form-check-label">
+                  Ingredients
+                </label>
+                <input type="radio" id="ingredients" name="radio" className="form-check-input" />
+              </div>
+            </div>
+
+            {/* btn - submit */}
+            <button className="btn btn-dark text-white fw-bold border-warning" type="submit">
+              Search
+            </button>
+          </div>
+        </form>
+      </section>
+
+
+      {/* FORM - Select available filter option */}
       <section>
-        {/* FORM - Select filter option */}
-        <form className="btn-group d-flex flex-column align-items-center mb-4" onSubmit={handleSubmit}>
+        <form className="btn-group d-flex flex-column align-items-center mb-4" onSubmit={handleSubmitFilterOption}>
           <div className="row mb-4 text-center mb-4">
             {selectedFilterOption.displayedOptionsList && (selectedFilterOption.displayedOptionsList.map(option => {
               // console.log(option);
@@ -109,10 +149,10 @@ const AdvanceSearch = () => {
 
         {selectedFilterOption.displayedOptionsList.length >= 30 && (
           <div className="btn-container mt-3">
-            <button className="btn btn-primary px-4 mx-5 btn-prev" onClick={() => displayAdditionalOptions('minus')}>
+            <button className="btn btn-primary px-4 mx-5 btn-prev" onClick={() => displayAdditionalIngredientsOptions('minus')}>
               Prev
             </button>
-            <button className="btn btn-primary px-4 mx-5 btn-next" onClick={() => displayAdditionalOptions('plus')}>
+            <button className="btn btn-primary px-4 mx-5 btn-next" onClick={() => displayAdditionalIngredientsOptions('plus')}>
               Next
             </button>
           </div>
