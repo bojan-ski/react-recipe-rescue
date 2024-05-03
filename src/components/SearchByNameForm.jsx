@@ -20,7 +20,7 @@ const SearchByNameForm = () => {
 
       <form className="w-50 mx-auto d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
         {/* input field */}
-        <input type="text" name="searchTerm" id="searchTerm" className="search-form-input w-75" placeholder="Enter search term" required />
+        <input type="text" name="searchTerm" id="searchTerm" className="search-form-input w-75" placeholder="Enter search term (meal name)" required />
 
         {/* btn - submit */}
         <button className="btn border-success" type="submit">
