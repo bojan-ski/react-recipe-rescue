@@ -1,9 +1,9 @@
 import { useGlobalContext } from "../context";
 
 const SearchByNameForm = () => {
-  const { getRecipesBySearchTerm, setSearchTerm } = useGlobalContext()
+  const { setSearchTerm, getRecipesBySearchTerm } = useGlobalContext()
 
-  const handleSubmit = e => {
+  const handleSubmitSearchTerm = e => {
     e.preventDefault()
     // console.log(e.target.searchTerm.value);
     setSearchTerm(e.target.searchTerm.value.toLowerCase().trim());
@@ -18,7 +18,7 @@ const SearchByNameForm = () => {
         You have a recipe in mind?
       </h3>
 
-      <form className="w-50 mx-auto d-flex justify-content-center align-items-center" onSubmit={handleSubmit}>
+      <form className="w-50 mx-auto d-flex justify-content-center align-items-center" onSubmit={handleSubmitSearchTerm}>
         {/* input field */}
         <input type="text" name="searchTerm" id="searchTerm" className="search-form-input w-75" placeholder="Enter search term (meal name)" required />
 

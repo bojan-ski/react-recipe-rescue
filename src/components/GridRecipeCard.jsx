@@ -4,7 +4,7 @@ const GridRecipeCard = ({ recipe }) => {
     // console.log(recipe);
     return (
         <>
-            <div className="col-12 col-md-6 col-lg-3 mb-2" key={recipe.idMeal}>
+            <div className="col-12 col-md-6 col-lg-3 mb-2">
                 <div className="card recipe-card">
                     <div className="img-container mb-2">
                         <img src={recipe.strMealThumb} alt={recipe.strMeal} className="img-fluid" />

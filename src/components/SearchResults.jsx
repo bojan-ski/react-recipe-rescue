@@ -17,6 +17,7 @@ const SearchResults = () => {
         <>
             <section className="search-results-section mt-5">
                 <div className="container">
+                    {/* section header */}
                     {searchTerm ? (
                         <h2 className="text-center mb-4">
                             Search results for: {searchTerm.toUpperCase()}
@@ -25,6 +26,7 @@ const SearchResults = () => {
                         ''
                     )}
 
+                    {/* List of recipes - search results */}
                     <RecipeList listOfRecipes={searchTermResults}/>
                 </div>
             </section>
