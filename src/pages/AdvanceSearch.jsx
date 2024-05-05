@@ -1,7 +1,7 @@
 import axios from "axios";
-// import { useEffect } from "react";
-import { useState } from "react";
 import { selectFilterOption } from "../utils/selectFilterOption";
+import { useState, useEffect } from "react";
+import RecipeList from "../components/RecipeList";
 
 // const urlCategories = 'list.php?c=list'
 // const urlArea = 'list.php?a=list'
@@ -16,6 +16,9 @@ const AdvanceSearch = () => {
     displayedOptionsList: ''
   })
   const [selectedOption, setSelectedOption] = useState('')
+  const [filterURL, setFilterURL] = useState('')
+
+  const [listOfRecipes, setListOfRecipes] = useState({})
 
   const displayFilterOptions = async (urlType) => {
     // console.log(urlType);
@@ -36,6 +39,19 @@ const AdvanceSearch = () => {
     }
   }
 
+  const displaySelectedOptionRecipe = async (filterURL, selectedOption) => {
+    // console.log(filterURL);
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_URL}${filterURL}${selectedOption}`)
+      // console.log(response);
+      const results = response.data.meals
+      // console.log(results);
+      setListOfRecipes(results)
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const handleSubmitRadioOption = e => {
     e.preventDefault()
 
@@ -43,10 +59,13 @@ const AdvanceSearch = () => {
 
     if (urlType === "ingredients") {
       displayFilterOptions('list.php?i=list')
+      setFilterURL('filter.php?i=')
     } else if (urlType === "area") {
       displayFilterOptions('list.php?a=list')
+      setFilterURL('filter.php?a=')
     } else {
       displayFilterOptions('list.php?c=list')
+      setFilterURL('filter.php?c=')
     }
   }
 
@@ -55,8 +74,6 @@ const AdvanceSearch = () => {
 
     setSelectedOption(selectFilterOption(Array.from(e.target.elements)))
   }
-
-  console.log(selectedOption);
 
   const displayAdditionalIngredientsOptions = (term) => {
     // console.log(term);
@@ -86,8 +103,20 @@ const AdvanceSearch = () => {
     // console.log(a, b);
   }
 
+  // console.log(filterURL);
+  // console.log(selectedOption);
+  // console.log(listOfRecipes);
+
+  useEffect(() => {
+    displaySelectedOptionRecipe(filterURL, selectedOption)
+  }, [selectedOption])
+
+  // const displayRecipe = () => {
+  //   displaySelectedOptionRecipe(filterURL, selectedOption)
+  // }
+
   return (
-    <div className="my-5">
+    <div className="container my-5">
       {/* FORM - Select filter options */}
       <section className="mb-3">
         <form className="w-50 mx-auto" onSubmit={handleSubmitRadioOption}>
@@ -124,42 +153,49 @@ const AdvanceSearch = () => {
 
 
       {/* FORM - Select available filter option */}
-      <section>
-        <form className="btn-group d-flex flex-column align-items-center mb-4" onSubmit={handleSubmitFilterOption}>
-          <div className="row mb-4 text-center mb-4">
-            {selectedFilterOption.displayedOptionsList && (selectedFilterOption.displayedOptionsList.map(option => {
-              // console.log(option);
-              const name = option.strArea || option.strCategory || option.strIngredient
+      {selectedFilterOption.displayedOptionsList && (
+        <section>
+          <form className="btn-group d-flex flex-column align-items-center mb-4" onSubmit={handleSubmitFilterOption}>
 
-              return (
-                <div className="col-6 col-md-4 col-lg-2 mb-2">
-                  <input type="radio" className="btn-check" name="options-base" id={name} value={name} autoComplete="off" />
-                  <label className="btn" htmlFor={name}>
-                    {name}
-                  </label>
-                </div>
-              )
-            }))}
-          </div >
+            <div className="row mb-4 text-center mb-4">
+              {selectedFilterOption.displayedOptionsList.map(option => {
+                // console.log(option);
+                const name = option.strArea || option.strCategory || option.strIngredient
 
-          <button type="submit" className="btn bg-success rounded fw-bold text-uppercase w-50">
-            submit
-          </button>
-        </form>
+                return (
+                  <div className="col-6 col-md-4 col-lg-2 mb-2">
+                    <input type="radio" className="btn-check" name="options-base" id={name} value={name} autoComplete="off" />
+                    <label className="btn" htmlFor={name}>
+                      {name}
+                    </label>
+                  </div>
+                )
+              })}
+            </div >
 
-        {selectedFilterOption.displayedOptionsList.length >= 30 && (
-          <div className="btn-container mt-3">
-            <button className="btn btn-primary px-4 mx-5 btn-prev" onClick={() => displayAdditionalIngredientsOptions('minus')}>
-              Prev
+            <button type="submit" className="btn bg-success rounded fw-bold text-uppercase w-50">
+              submit
             </button>
-            <button className="btn btn-primary px-4 mx-5 btn-next" onClick={() => displayAdditionalIngredientsOptions('plus')}>
-              Next
-            </button>
-          </div>
-        )}
-      </section>
+          </form>
 
+          {selectedFilterOption.displayedOptionsList.length >= 30 && (
+            <div className="btn-container mt-3">
+              <button className="btn btn-primary px-4 mx-5 btn-prev" onClick={() => displayAdditionalIngredientsOptions('minus')}>
+                Prev
+              </button>
+              <button className="btn btn-primary px-4 mx-5 btn-next" onClick={() => displayAdditionalIngredientsOptions('plus')}>
+                Next
+              </button>
+            </div>
+          )}
+        </section>
+      )}
 
+      {/* <button className="btn btn-primary" onClick={displayRecipe}>
+        Display Recipe
+      </button> */}
+
+      <RecipeList listOfRecipes={listOfRecipes} />
     </div>
   )
 }

@@ -1,11 +1,11 @@
-import RecipeList from "../components/RecipeList"
 import SearchByNameForm from "../components/SearchByNameForm"
+import SearchResults from "../components/SearchResults"
 
 const Dashboard = () => {
   return (
     <>
       <SearchByNameForm />
-      <RecipeList />
+      <SearchResults />
     </>
   )
 }

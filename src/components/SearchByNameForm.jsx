@@ -1,14 +1,14 @@
 import { useGlobalContext } from "../context";
 
 const SearchByNameForm = () => {
-  const { getData, setSearchTerm } = useGlobalContext()
+  const { getRecipesBySearchTerm, setSearchTerm } = useGlobalContext()
 
   const handleSubmit = e => {
     e.preventDefault()
     // console.log(e.target.searchTerm.value);
     setSearchTerm(e.target.searchTerm.value.toLowerCase().trim());
 
-    getData(e.target.searchTerm.value)
+    getRecipesBySearchTerm(e.target.searchTerm.value)
     e.target.searchTerm.value = ''
   }
 
