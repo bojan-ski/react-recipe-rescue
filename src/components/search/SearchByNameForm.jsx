@@ -1,4 +1,4 @@
-import { useGlobalContext } from "../context";
+import { useGlobalContext } from "../../context";
 
 const SearchByNameForm = () => {
   const { setSearchTerm, getRecipesBySearchTerm } = useGlobalContext()
@@ -20,10 +20,10 @@ const SearchByNameForm = () => {
 
       <form className="w-50 mx-auto d-flex justify-content-center align-items-center" onSubmit={handleSubmitSearchTerm}>
         {/* input field */}
-        <input type="text" name="searchTerm" id="searchTerm" className="search-form-input w-75" placeholder="Enter search term (meal name)" required />
+        <input type="text" name="searchTerm" id="searchTerm" className="search-form-input w-75" placeholder="Enter search term (recipe)" required />
 
         {/* btn - submit */}
-        <button className="btn border-success" type="submit">
+        <button className="btn btn-success" type="submit">
           Search
         </button>
       </form>

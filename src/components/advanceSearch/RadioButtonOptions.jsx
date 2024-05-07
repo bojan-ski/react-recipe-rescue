@@ -22,11 +22,11 @@ const RadioButtonOptions = () => {
     }
 
     return (
-        <section className="mb-3">
+        <section className="radio-options mb-3">
             <form className="w-50 mx-auto" onSubmit={handleSubmitRadioOption}>
                 {/* radio btns */}
                 <div className="d-flex flex-column flex-md-row justify-content-between align-items-center">
-                    <div className="d-flex">
+                    <div className="d-flex mb-3 mb-md-0 me-4">
                         <div className="form-check">
                             <label htmlFor="categories" className="form-check-label">
                                 Categories
@@ -48,7 +48,7 @@ const RadioButtonOptions = () => {
                     </div>
 
                     {/* btn - submit */}
-                    <button className="btn btn-success" type="submit">
+                    <button className="btn btn-success fw-bold px-4" type="submit">
                         Select
                     </button>
                 </div>

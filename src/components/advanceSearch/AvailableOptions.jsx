@@ -44,29 +44,30 @@ const AvailableOptions = () => {
     return (
         <>
             {selectedFilterOption.displayedOptionsList && (
-                <section className="mb-4">
+                <section className="available-options mb-4">
                     {/* available options */}
                     <form className="btn-group d-flex flex-column align-items-center mb-4" onSubmit={handleSubmitFilterOption}>
 
-                        <div className="row mb-4 text-center mb-4">
+                        <div className="row mb-4 gap-1 align-items-center justify-content-center">
                             {selectedFilterOption.displayedOptionsList.map((option, idx) => {
                                 // console.log(option);
                                 const name = option.strArea || option.strCategory || option.strIngredient
 
                                 return (
-                                    <div key={idx} className="col-6 col-md-4 col-lg-2 mb-2">
+                                    <div key={idx} className="option col-5 col-md-3 col-lg-2 p-1">
                                         <input type="radio" className="btn-check" name="options-base" id={name} value={name} autoComplete="off" />
-                                        <label className="btn" htmlFor={name}>
+                                        <label className="btn btn-outline-success w-100" htmlFor={name}>
                                             {name}
                                         </label>
                                     </div>
                                 )
                             })}
                         </div >
-
-                        <button type="submit" className="btn text-white bg-success rounded fw-bold text-uppercase w-50">
-                            Select
-                        </button>
+                        <div>
+                            <button type="submit" className="btn w-100 text-white bg-success rounded fw-bold text-uppercase px-5">
+                                Select
+                            </button>
+                        </div>
                     </form>
 
                     {/* pagination for available options */}

@@ -1,7 +1,7 @@
 import {  useEffect } from "react";
 import RecipeList from "../components/RecipeList";
 import { useGlobalContext } from "../context";
-import RadioButtonOptions from "../components/advanceSearch/advanceSearch";
+import RadioButtonOptions from "../components/advanceSearch/RadioButtonOptions";
 import AvailableOptions from "../components/advanceSearch/AvailableOptions";
 
 const AdvanceSearch = () => {

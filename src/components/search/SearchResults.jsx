@@ -1,5 +1,5 @@
-import { useGlobalContext } from "../context"
-import RecipeList from './RecipeList'
+import { useGlobalContext } from "../../context"
+import RecipeList from '../RecipeList'
 
 const SearchResults = () => {
     const { searchTerm, searchTermResults } = useGlobalContext()
@@ -8,7 +8,7 @@ const SearchResults = () => {
     if (!searchTermResults) {
         return <section className="search-results-section mt-5">
             <h2 className="text-center">
-                No search results found, please try a new recipe (recipe name)
+                No search results found, please try a new recipe
             </h2>
         </section>
     }

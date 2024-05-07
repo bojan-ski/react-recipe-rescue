@@ -5,18 +5,9 @@ import { getRecipeDetails } from "./utils/getRecipeDetails";
 const AppContext = createContext()
 
 export const AppProvider = ({ children }) => {
+    //search feature
     const [searchTerm, setSearchTerm] = useState('')
     const [searchTermResults, setSearchTermResults] = useState({})
-
-    const [recipeDetails, setRecipeDetails] = useState({})
-
-    const [selectedFilterOption, setSelectedFilterOption] = useState({
-        totalOptionsList: '',
-        displayedOptionsList: ''
-    })
-    const [filterURL, setFilterURL] = useState('')
-    const [selectedOption, setSelectedOption] = useState('')
-    const [selectedFilterOptionResults, setSelectedFilterOptionResults] = useState({})
 
     const getRecipesBySearchTerm = async (searchTerm) => {
         // console.log(searchTerm);
@@ -31,6 +22,9 @@ export const AppProvider = ({ children }) => {
         }
     }
 
+    //recipe details
+    const [recipeDetails, setRecipeDetails] = useState({})
+
     const getSelectedRecipeDetails = async (id) => {
         // console.log(id);
         const recipeData = await getRecipeDetails('lookup.php?i=', id)
@@ -42,8 +36,14 @@ export const AppProvider = ({ children }) => {
         setRecipeDetails(recipeData)
     }
 
-    // console.log(listOfRecipes);
-    // console.log(recipeDetails);
+    //advance search
+    const [selectedFilterOption, setSelectedFilterOption] = useState({
+        totalOptionsList: '',
+        displayedOptionsList: ''
+    })
+    const [filterURL, setFilterURL] = useState('')
+    const [selectedOption, setSelectedOption] = useState('')
+    const [selectedFilterOptionResults, setSelectedFilterOptionResults] = useState({})
 
 
     const displaySelectedOptionRecipe = async (filterURL, selectedOption) => {
@@ -79,7 +79,13 @@ export const AppProvider = ({ children }) => {
     }
 
     return <AppContext.Provider value={{
-        getRecipesBySearchTerm, searchTerm, setSearchTerm, searchTermResults, setSearchTermResults, getSelectedRecipeDetails, recipeDetails, getRandomRecipeDetails,
+        getRecipesBySearchTerm, // SearchByNameForm.jsx
+        searchTerm, // SearchResults.jsx
+        setSearchTerm, // SearchByNameForm.jsx
+        searchTermResults, // SearchResults.jsx 
+        getSelectedRecipeDetails, // SelectedRecipe.jsx
+        recipeDetails, // SelectedRecipe.jsx - RandomRecipe.jsx
+        getRandomRecipeDetails, // RandomRecipe.jsx
         selectedFilterOption,
         setSelectedFilterOption,
         filterURL,

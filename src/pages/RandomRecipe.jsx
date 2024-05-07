@@ -10,7 +10,7 @@ const RandomRecipe = () => {
         getRandomRecipeDetails()
     }, [])
 
-    return <RecipeDetails recipeDetails={recipeDetails} getRandomRecipeDetails={getRandomRecipeDetails}/>
+    return <RecipeDetails recipeDetails={recipeDetails} getRandomRecipeDetails={getRandomRecipeDetails} />
 }
 
 export default RandomRecipe

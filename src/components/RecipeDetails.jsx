@@ -25,7 +25,7 @@ const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
                                 New Suggestion
                             </button>
                         ) : (
-                            <Link to='/' className="btn btn-info px-4">
+                            <Link to='/' className="btn btn-success px-4">
                                 Back
                             </Link>
                         )}
@@ -49,23 +49,23 @@ const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
                         {/* row item 2 */}
                         <div className="col-12 col-md-6 mb-4">
                             <p className="mb-1">
-                                <span>Meal origin: </span> {recipeDetails.strArea}
+                                <span>Recipe origin: </span> {recipeDetails.strArea}
                             </p>
                             <p className="mb-1">
                                 <span>Category:</span> {recipeDetails.strCategory}
                             </p>
-                            <p>
+                            <p className="mb-1">
                                 <span>Ingredients:</span>
-                                <ul>
-                                    {ingredients.map((item, idx) => {
-                                        return (
-                                            <li key={idx} className="">
-                                                {item}: {measure[idx]} {idx < ingredients.length - 1 ? ',' : ''}
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
                             </p>
+                            <ul>
+                                {ingredients.map((item, idx) => {
+                                    return (
+                                        <li key={idx} className="">
+                                            {item}: {measure[idx]} {idx < ingredients.length - 1 ? ',' : ''}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </div>
 
                         {/* row item 3 */}

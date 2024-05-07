@@ -1,5 +1,6 @@
 import axios from "axios"
 
+//function called in context.jsx:
 export const getRecipeDetails = async (path, id = '') => {
     try {
         const response = await axios.get(`${import.meta.env.VITE_URL}${path}${id}`)

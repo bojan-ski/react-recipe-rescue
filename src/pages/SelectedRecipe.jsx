@@ -12,7 +12,7 @@ const SelectedRecipe = () => {
         getSelectedRecipeDetails(params.id)
     }, [])
 
-    return <RecipeDetails recipeDetails={recipeDetails}/>
+    return <RecipeDetails recipeDetails={recipeDetails} />
 }
 
 export default SelectedRecipe

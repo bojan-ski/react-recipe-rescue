@@ -1,5 +1,5 @@
-import SearchByNameForm from "../components/SearchByNameForm"
-import SearchResults from "../components/SearchResults"
+import SearchByNameForm from "../components/search/SearchByNameForm"
+import SearchResults from "../components/search/SearchResults"
 
 const Dashboard = () => {
   return (
