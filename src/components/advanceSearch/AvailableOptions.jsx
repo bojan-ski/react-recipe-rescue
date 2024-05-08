@@ -44,7 +44,19 @@ const AvailableOptions = () => {
     return (
         <>
             {selectedFilterOption.displayedOptionsList && (
-                <section className="available-options mb-4">
+                <section className="available-options mb-5">
+                    {/* pagination for available options */}
+                    {selectedFilterOption.displayedOptionsList.length >= 30 && (
+                        <div className="btn-container text-center mb-3">
+                            <button className="btn btn-warning px-4 mx-5 btn-prev" onClick={() => displayAdditionalIngredientsOptions('minus')}>
+                                Prev
+                            </button>
+                            <button className="btn btn-warning px-4 mx-5 btn-next" onClick={() => displayAdditionalIngredientsOptions('plus')}>
+                                Next
+                            </button>
+                        </div>
+                    )}
+
                     {/* available options */}
                     <form className="btn-group d-flex flex-column align-items-center mb-4" onSubmit={handleSubmitFilterOption}>
 
@@ -69,18 +81,6 @@ const AvailableOptions = () => {
                             </button>
                         </div>
                     </form>
-
-                    {/* pagination for available options */}
-                    {selectedFilterOption.displayedOptionsList.length >= 30 && (
-                        <div className="btn-container mt-3">
-                            <button className="btn btn-primary px-4 mx-5 btn-prev" onClick={() => displayAdditionalIngredientsOptions('minus')}>
-                                Prev
-                            </button>
-                            <button className="btn btn-primary px-4 mx-5 btn-next" onClick={() => displayAdditionalIngredientsOptions('plus')}>
-                                Next
-                            </button>
-                        </div>
-                    )}
                 </section>
             )}
         </>

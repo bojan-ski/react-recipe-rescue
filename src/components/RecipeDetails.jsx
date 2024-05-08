@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 
 const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
-    // console.log(recipeDetails);
-    // console.log(getRandomRecipeDetails);
+    const [searchParams] = useSearchParams()
+    const backPath = searchParams.get("ref")
+    // console.log(backPath);
 
     const ingredients = Object.keys(recipeDetails)
         .filter((key) => key.startsWith('strIngredient') && recipeDetails[key] !== '' && recipeDetails[key] !== null)
@@ -25,7 +26,7 @@ const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
                                 New Suggestion
                             </button>
                         ) : (
-                            <Link to='/' className="btn btn-success px-4">
+                            <Link to={backPath === 'search' ? '/search' : '/'} className="btn btn-success px-4">
                                 Back
                             </Link>
                         )}

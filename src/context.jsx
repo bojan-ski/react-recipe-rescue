@@ -24,6 +24,7 @@ export const AppProvider = ({ children }) => {
 
     //recipe details
     const [recipeDetails, setRecipeDetails] = useState({})
+    const [previousPagePath, setPreviousPagePath] = useState('')
 
     const getSelectedRecipeDetails = async (id) => {
         // console.log(id);
@@ -45,20 +46,6 @@ export const AppProvider = ({ children }) => {
     const [selectedOption, setSelectedOption] = useState('')
     const [selectedFilterOptionResults, setSelectedFilterOptionResults] = useState({})
 
-
-    const displaySelectedOptionRecipe = async (filterURL, selectedOption) => {
-        // console.log(filterURL);
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_URL}${filterURL}${selectedOption}`)
-            // console.log(response);
-            const results = response.data.meals
-            // console.log(results);
-            setSelectedFilterOptionResults(results)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
     const displayFilterOptions = async (urlType) => {
         // console.log(urlType);
         try {
@@ -78,6 +65,20 @@ export const AppProvider = ({ children }) => {
         }
     }
 
+    const displaySelectedOptionRecipe = async (filterURL, selectedOption) => {
+        // console.log(filterURL);
+        try {
+            const response = await axios.get(`${import.meta.env.VITE_URL}${filterURL}${selectedOption}`)
+            // console.log(response);
+            const results = response.data.meals
+            // console.log(results);
+            setSelectedFilterOptionResults(results)
+            setPreviousPagePath('search')
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return <AppContext.Provider value={{
         getRecipesBySearchTerm, // SearchByNameForm.jsx
         searchTerm, // SearchResults.jsx
@@ -86,16 +87,16 @@ export const AppProvider = ({ children }) => {
         getSelectedRecipeDetails, // SelectedRecipe.jsx
         recipeDetails, // SelectedRecipe.jsx - RandomRecipe.jsx
         getRandomRecipeDetails, // RandomRecipe.jsx
-        selectedFilterOption,
-        setSelectedFilterOption,
-        filterURL,
-        setFilterURL,
-        selectedOption,
-        setSelectedOption,
-        selectedFilterOptionResults,
-        setSelectedFilterOptionResults,
-        displaySelectedOptionRecipe,
-        displayFilterOptions
+        previousPagePath, // GridRecipeCard.jsx
+        selectedFilterOption, // AvailableOptions.jsx
+        setSelectedFilterOption, // AvailableOptions.jsx
+        filterURL, // AdvanceSearch.jsx
+        setFilterURL, // RadioButtonOptions.jsx
+        selectedOption, // AdvanceSearch.jsx
+        setSelectedOption, // AvailableOptions.jsx
+        selectedFilterOptionResults, // AdvanceSearch.jsx
+        displayFilterOptions, // RadioButtonOptions.jsx
+        displaySelectedOptionRecipe // AdvanceSearch.jsx
     }}>
         {children}
     </AppContext.Provider>
