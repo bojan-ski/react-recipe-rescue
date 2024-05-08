@@ -6,7 +6,6 @@ import RecipeDetails from "../components/RecipeDetails";
 const SelectedRecipe = () => {
     const params = useParams()
     const { getSelectedRecipeDetails, recipeDetails } = useGlobalContext()
-    // console.log(params.id);
 
     useEffect(() => {
         getSelectedRecipeDetails(params.id)

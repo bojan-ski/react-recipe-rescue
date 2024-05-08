@@ -2,14 +2,12 @@ import { Link } from "react-router-dom"
 import { useGlobalContext } from "../context";
 
 const GridRecipeCard = ({ recipe }) => {
-    // console.log(recipe);
     const { previousPagePath } = useGlobalContext()
 
     let pageURL = `/recipe/${recipe.idMeal}`;
 
     if (previousPagePath !== '') {
         pageURL += `?ref=${previousPagePath}`
-        // console.log(pageURL);
     }
 
     return (

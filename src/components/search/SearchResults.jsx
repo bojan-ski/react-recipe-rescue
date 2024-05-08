@@ -3,7 +3,6 @@ import RecipeList from '../RecipeList'
 
 const SearchResults = () => {
     const { searchTerm, searchTermResults } = useGlobalContext()
-    // console.log(searchTermResults);
 
     if (!searchTermResults) {
         return <section className="search-results-section mt-5">

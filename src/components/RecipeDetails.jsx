@@ -3,7 +3,6 @@ import { Link, useSearchParams } from "react-router-dom";
 const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
     const [searchParams] = useSearchParams()
     const backPath = searchParams.get("ref")
-    // console.log(backPath);
 
     const ingredients = Object.keys(recipeDetails)
         .filter((key) => key.startsWith('strIngredient') && recipeDetails[key] !== '' && recipeDetails[key] !== null)
@@ -12,9 +11,6 @@ const RecipeDetails = ({ recipeDetails, getRandomRecipeDetails }) => {
     const measure = Object.keys(recipeDetails)
         .filter((key) => key.startsWith('strMeasure') && recipeDetails[key] !== " " && recipeDetails[key] !== "")
         .map((key) => recipeDetails[key]);
-
-    // console.log(ingredients);
-    // console.log(measure);
 
     return (
         <>

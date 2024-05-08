@@ -5,9 +5,8 @@ const SearchByNameForm = () => {
 
   const handleSubmitSearchTerm = e => {
     e.preventDefault()
-    // console.log(e.target.searchTerm.value);
+    
     setSearchTerm(e.target.searchTerm.value.toLowerCase().trim());
-
     getRecipesBySearchTerm(e.target.searchTerm.value)
     e.target.searchTerm.value = ''
   }

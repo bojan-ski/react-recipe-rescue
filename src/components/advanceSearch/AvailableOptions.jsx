@@ -14,9 +14,6 @@ const AvailableOptions = () => {
     }
 
     const displayAdditionalIngredientsOptions = (term) => {
-        // console.log(term);
-        // console.log(a, b);
-
         if (term === 'plus') {
             pointA += 30
             pointB += 30
@@ -38,7 +35,6 @@ const AvailableOptions = () => {
                 displayedOptionsList: currData.totalOptionsList.slice(pointA, pointB)
             }))
         }
-        // console.log(a, b);
     }
 
     return (
@@ -62,7 +58,6 @@ const AvailableOptions = () => {
 
                         <div className="row mb-4 gap-1 align-items-center justify-content-center">
                             {selectedFilterOption.displayedOptionsList.map((option, idx) => {
-                                // console.log(option);
                                 const name = option.strArea || option.strCategory || option.strIngredient
 
                                 return (

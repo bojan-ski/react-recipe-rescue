@@ -10,12 +10,9 @@ export const AppProvider = ({ children }) => {
     const [searchTermResults, setSearchTermResults] = useState({})
 
     const getRecipesBySearchTerm = async (searchTerm) => {
-        // console.log(searchTerm);
         try {
             const response = await axios.get(`${import.meta.env.VITE_URL}search.php?s=${searchTerm}`)
-            // console.log(response);
             const results = response.data
-            // console.log(results);
             setSearchTermResults(results.meals);
         } catch (error) {
             console.log(error);
@@ -27,7 +24,6 @@ export const AppProvider = ({ children }) => {
     const [previousPagePath, setPreviousPagePath] = useState('')
 
     const getSelectedRecipeDetails = async (id) => {
-        // console.log(id);
         const recipeData = await getRecipeDetails('lookup.php?i=', id)
         setRecipeDetails(recipeData)
     }
@@ -47,15 +43,9 @@ export const AppProvider = ({ children }) => {
     const [selectedFilterOptionResults, setSelectedFilterOptionResults] = useState({})
 
     const displayFilterOptions = async (urlType) => {
-        // console.log(urlType);
         try {
-            // const response = await axios.get(`${import.meta.env.VITE_URL}${urlCategories}`)
-            // const response = await axios.get(`${import.meta.env.VITE_URL}${urlArea}`)
-            // const response = await axios.get(`${import.meta.env.VITE_URL}${urlIngredients}`)
             const response = await axios.get(`${import.meta.env.VITE_URL}${urlType}`)
-            // console.log(response);
             const results = response.data.meals
-            // console.log(results);
             setSelectedFilterOption({
                 totalOptionsList: results,
                 displayedOptionsList: results.length > 30 ? results.slice(0, 30) : results
@@ -66,12 +56,9 @@ export const AppProvider = ({ children }) => {
     }
 
     const displaySelectedOptionRecipe = async (filterURL, selectedOption) => {
-        // console.log(filterURL);
         try {
             const response = await axios.get(`${import.meta.env.VITE_URL}${filterURL}${selectedOption}`)
-            // console.log(response);
             const results = response.data.meals
-            // console.log(results);
             setSelectedFilterOptionResults(results)
             setPreviousPagePath('search')
         } catch (error) {
